@@ -213,8 +213,8 @@ const Dashboard = () => {
                       className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                       onClick={() => navigate(`/students/${student.Id}`)}
                     >
-                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white text-xs font-medium">
-                        {student.firstName[0]}{student.lastName[0]}
+<div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white text-xs font-medium">
+                        {(student.first_name_c?.[0] || '?').toUpperCase()}{(student.last_name_c?.[0] || '?').toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900 truncate">
