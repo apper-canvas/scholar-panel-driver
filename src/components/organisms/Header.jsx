@@ -1,7 +1,41 @@
-import React from "react"
+import React, { useContext } from "react"
+import { useSelector } from "react-redux"
 import SearchBar from "@/components/molecules/SearchBar"
 import ApperIcon from "@/components/ApperIcon"
+import Button from "@/components/atoms/Button"
+import { AuthContext } from "../../App"
 
+const UserMenu = () => {
+  const { logout } = useContext(AuthContext)
+  const userState = useSelector((state) => state.user)
+  const user = userState?.user
+  
+  const handleLogout = () => {
+    logout()
+  }
+  
+  return (
+    <>
+      <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+        <ApperIcon name="User" size={16} className="text-white" />
+      </div>
+      <div className="hidden md:block">
+        <p className="text-sm font-medium text-gray-900">
+          {user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Teacher'}
+        </p>
+        <p className="text-xs text-gray-500">Educator</p>
+      </div>
+      <Button
+        variant="secondary"
+        size="sm"
+        icon="LogOut"
+        onClick={handleLogout}
+      >
+        Logout
+      </Button>
+    </>
+  )
+}
 const Header = ({ title, search, onSearchChange, actions }) => {
   return (
     <div className="bg-white border-b border-gray-100 px-6 py-4 lg:px-8">
@@ -27,15 +61,9 @@ const Header = ({ title, search, onSearchChange, actions }) => {
         <div className="flex items-center space-x-3">
           {actions}
           
-          {/* User Menu */}
+{/* User Menu */}
           <div className="flex items-center space-x-3 ml-6 pl-6 border-l border-gray-200">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-              <ApperIcon name="User" size={16} className="text-white" />
-            </div>
-            <div className="hidden md:block">
-              <p className="text-sm font-medium text-gray-900">Teacher</p>
-              <p className="text-xs text-gray-500">Educator</p>
-            </div>
+            <UserMenu />
           </div>
         </div>
       </div>
